@@ -107,10 +107,11 @@ contract NFTMarketplace is ReentrancyGuard {
         uint currentIndex = 0;
 
         MarketItem[] memory items = new MarketItem[](unsoldItemCount);
-        for (uint i = 1; i < itemCount; i++) {
-            if (idToMarketItem[i].owner == address(this)) {
+        for (uint i = 1; i < itemCount + 1; i++) {
+            if (idToMarketItem[i].owner == address(0)) {
                 uint currentId = i;
-                items[currentIndex] = idToMarketItem[currentId];
+                MarketItem storage currentItem = idToMarketItem[currentId];
+                items[currentIndex] = currentItem;
                 currentIndex += 1;
             }
         }
@@ -122,14 +123,14 @@ contract NFTMarketplace is ReentrancyGuard {
         uint itemCount = 0;
         uint currentIndex = 0;
 
-        for (uint i = 1; i < totalItemCount; i++) {
+        for (uint i = 1; i < totalItemCount + 1; i++) {
             if (idToMarketItem[i].owner == msg.sender) {
                 itemCount += 1;
             }
         }
 
         MarketItem[] memory items = new MarketItem[](itemCount);
-        for (uint i = 1; i < totalItemCount; i++) {
+        for (uint i = 1; i < totalItemCount + 1; i++) {
             if (idToMarketItem[i].owner == msg.sender) {
                 uint currentId = i;
                 items[currentIndex] = idToMarketItem[currentId];
@@ -144,14 +145,14 @@ contract NFTMarketplace is ReentrancyGuard {
         uint itemCount = 0;
         uint currentIndex = 0;
 
-        for (uint i = 1; i < totalItemCount; i++) {
+        for (uint i = 1; i < totalItemCount + 1; i++) {
             if (idToMarketItem[i].seller == msg.sender) {
                 itemCount += 1;
             }
         }
 
         MarketItem[] memory items = new MarketItem[](itemCount);
-        for (uint i = 1; i < totalItemCount; i++) {
+        for (uint i = 1; i < totalItemCount + 1; i++) {
             if (idToMarketItem[i].seller == msg.sender) {
                 uint currentId = i;
                 items[currentIndex] = idToMarketItem[currentId];
