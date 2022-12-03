@@ -12,6 +12,7 @@ contract Ticket is ERC721URIStorage {
     uint price;
     uint maxTicketsSupply;
     string uri;
+    address eventOwner;
 
     // Event for when a ticket is created
     event TicketMinted(uint id, address owner);
@@ -24,17 +25,22 @@ contract Ticket is ERC721URIStorage {
         string memory _symbol,
         uint _price,
         uint _maxTicketsSupply,
-        string memory _uri
+        string memory _uri,
+        address _eventOwner
     ) ERC721(_name, _symbol) {
       price = _price;
       maxTicketsSupply = _maxTicketsSupply;
       uri = _uri;
+      eventOwner = _eventOwner;
     }
 
     // Function to create a new ticket
     function mintTicket() external payable returns (uint) {
         require(_ticketIds.current() < maxTicketsSupply);
         require(msg.value == price, 'You must send the ticket price value');
+
+        (bool sent,) = payable(eventOwner).call{value: msg.value}("");
+        require(sent, 'Transaction failed');
 
         uint id = _ticketIds.current();
         _mint(msg.sender, id);

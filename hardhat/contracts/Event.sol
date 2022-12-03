@@ -49,7 +49,8 @@ contract Event {
             _ticketSymbol,
             _ticketPrice,
             _maxTicketSupply,
-            _ticketURI
+            _ticketURI,
+            msg.sender
         );
 
         events[id] = EventInfo({
