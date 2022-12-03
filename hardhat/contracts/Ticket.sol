@@ -35,7 +35,7 @@ contract Ticket is ERC721 {
     }
 
     // Function to create a new ticket
-    function mintTicket() external payable returns (uint) {
+    function mintTicket() external payable {
         require(_ticketIds.current() < maxTicketsSupply);
         require(msg.value == price, 'You must send the ticket price value');
 
@@ -49,8 +49,6 @@ contract Ticket is ERC721 {
         emit TicketMinted(id, msg.sender);
 
         _ticketIds.increment();
-
-        return id;
     }
 
 }
