@@ -42,7 +42,7 @@ contract Event {
         uint _ticketPrice,
         uint _maxTicketSupply,
         string memory _ticketURI
-    ) external returns (uint) {
+    ) external {
         uint id = _eventIds.current();
         Ticket ticket = new Ticket(
             _ticketName,
@@ -64,8 +64,6 @@ contract Event {
         emit EventCreated(id, _name, _date, _location, ticket);
 
         _eventIds.increment();
-
-        return id;
     }
 
     // Function to update an existing event
