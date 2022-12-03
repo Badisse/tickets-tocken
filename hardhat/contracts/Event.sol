@@ -15,6 +15,7 @@ contract Event {
         string date;
         string location;
         Ticket ticket;
+        string uri;
     }
 
     // Mapping from event id to event struct
@@ -26,7 +27,8 @@ contract Event {
         string name,
         string date,
         string location,
-        Ticket ticket
+        Ticket ticket,
+        string uri
     );
 
     // Event for when an event is updated
@@ -37,6 +39,7 @@ contract Event {
         string memory _name,
         string memory _date,
         string memory _location,
+        string memory _uri,
         string memory _ticketName,
         string memory _ticketSymbol,
         uint _ticketPrice,
@@ -57,26 +60,29 @@ contract Event {
           name: _name,
           date: _date,
           location: _location,
-          ticket: ticket
+          ticket: ticket,
+          uri: _uri
         });
 
         // Emit event to indicate that the event has been created
-        emit EventCreated(id, _name, _date, _location, ticket);
+        emit EventCreated(id, _name, _date, _location, ticket, _uri);
 
         _eventIds.increment();
     }
 
     // Function to update an existing event
     function updateEvent(
-        uint id,
-        string memory name,
-        string memory date,
-        string memory location
+        uint _id,
+        string memory _name,
+        string memory _date,
+        string memory _location,
+        string memory _uri
     ) external {
-        events[id].name = name;
-        events[id].date = date;
-        events[id].location = location;
+        events[_id].name = _name;
+        events[_id].date = _date;
+        events[_id].location = _location;
+        events[_id].uri = _uri;
 
-        emit EventUpdated(id, name, date, location);
+        emit EventUpdated(_id, _name, _date, _location);
     }
 }
