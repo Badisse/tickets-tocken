@@ -9,10 +9,10 @@ contract Ticket is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter public _ticketIds;
 
-    uint price;
-    uint maxTicketsSupply;
-    string uri;
-    address eventOwner;
+    uint public price;
+    uint public maxTicketsSupply;
+    string public uri;
+    address public eventOwner;
 
     // Event for when a ticket is created
     event TicketMinted(uint id, address owner);
