@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity 0.8.17;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 // Ticket contract
-contract Ticket is ERC721URIStorage {
+contract Ticket is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter public _ticketIds;
 
