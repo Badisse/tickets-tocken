@@ -17,7 +17,7 @@ export const serverSchema = z.object({
  */
 export const clientSchema = z.object({
   // NEXT_PUBLIC_BAR: z.string(),
-  NEX_PUBLIC_EVENT_ADDRESS: z.string(),
+  NEXT_PUBLIC_EVENT_ADDRESS: z.string(),
 });
 
 /**
@@ -28,5 +28,5 @@ export const clientSchema = z.object({
  */
 export const clientEnv = {
   // NEXT_PUBLIC_BAR: process.env.NEXT_PUBLIC_BAR,
-  NEX_PUBLIC_EVENT_ADDRESS: process.env.NEX_PUBLIC_EVENT_ADDRESS,
+  NEXT_PUBLIC_EVENT_ADDRESS: process.env.NEXT_PUBLIC_EVENT_ADDRESS,
 };
