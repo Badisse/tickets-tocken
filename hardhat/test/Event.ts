@@ -19,6 +19,7 @@ describe("Event", function () {
       "Test Event",
       "2022-12-03",
       "Test location",
+      "http://example.com/event",
       "Test Ticket",
       "TT",
       100,
