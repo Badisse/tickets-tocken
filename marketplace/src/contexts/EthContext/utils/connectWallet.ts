@@ -1,8 +1,10 @@
 import { ethers } from 'ethers';
 import type { Dispatch } from 'react';
+import { clientEnv } from '../../../env/schema.mjs';
 import { actions } from '../state';
 import getAccount from './getAccount';
 import getProvider from './getProvider';
+import artifacts from '../../../../artifacts/contracts/Event.sol/Event.json'
 
 const connectWallet = (dispatch: Dispatch<Action>): Promise<void> => {
     const init = async () => {
@@ -10,6 +12,10 @@ const connectWallet = (dispatch: Dispatch<Action>): Promise<void> => {
         const account = await getAccount(provider);
         const networkID = await provider.getNetwork();
         const signer = provider.getSigner();
+
+        if (typeof clientEnv.NEXT_PUBLIC_EVENT_ADDRESS == 'undefined') return
+        const eventContract = new ethers.Contract(clientEnv.NEXT_PUBLIC_EVENT_ADDRESS, artifacts.abi, provider);
+
         let wsProvider;
 
         switch (networkID.chainId) {
@@ -33,6 +39,7 @@ const connectWallet = (dispatch: Dispatch<Action>): Promise<void> => {
                 signer,
                 account,
                 networkID,
+                eventContract
             },
         });
     };

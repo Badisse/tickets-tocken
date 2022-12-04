@@ -19,5 +19,5 @@ declare type State = {
   signer: ethers.Signer | null;
   account: string | null;
   networkID: ethers.providers.Network | null;
-  loading: boolean;
+  eventContract: ethers.Contract
 };

@@ -8,7 +8,7 @@ const initialState: State = {
     signer: null,
     account: null,
     networkID: null,
-    loading: false
+    eventContract: null
 };
 
 const reducer = (state: State, action: Action): State => {
@@ -16,7 +16,7 @@ const reducer = (state: State, action: Action): State => {
 
     switch (type) {
         case actions.connect:
-            return { ...initialState, ...payload, loading: false };
+            return { ...initialState, ...payload};
         default:
             throw new Error('Undefined reducer action type');
     }
