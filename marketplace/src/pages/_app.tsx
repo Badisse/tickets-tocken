@@ -5,6 +5,7 @@ import { trpc } from "../utils/trpc";
 import "../styles/globals.css";
 import type { Menu } from "../components/Navbar";
 import Navbar from "../components/Navbar";
+import { EthProvider } from "../contexts/EthContext";
 
 const menus: Menu[] = [
   {
@@ -23,10 +24,10 @@ const menus: Menu[] = [
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <>
+    <EthProvider>
       <Navbar menus={menus} />
       <Component {...pageProps} />
-    </>
+    </EthProvider>
   );
 };
 
