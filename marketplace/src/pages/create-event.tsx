@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
+import { useEth } from '../contexts/EthContext';
 
 const CreatEvent = () => {
   const [eventFactory, setEventFactory] = useState<EventFactory>()
+
+  const {
+    state: { eventContract },
+  } = useEth();
 
   const formInputs = [
     {
@@ -114,9 +119,25 @@ const CreatEvent = () => {
     },
   ]
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     console.log(eventFactory)
+
+    if(typeof eventFactory == 'undefined') return
+
+    const res = await eventContract.createEvent(
+      eventFactory.name,
+      eventFactory.date,
+      eventFactory.location,
+      eventFactory.uri,
+      eventFactory.ticketName,
+      eventFactory.ticketSymbol,
+      eventFactory.ticketPrice,
+      eventFactory.maxTicketSupply,
+      eventFactory.ticketURI
+    );
+
+    console.log(res)
   }
 
   return (

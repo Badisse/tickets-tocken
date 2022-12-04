@@ -14,7 +14,7 @@ const connectWallet = (dispatch: Dispatch<Action>): Promise<void> => {
         const signer = provider.getSigner();
 
         if (typeof clientEnv.NEXT_PUBLIC_EVENT_ADDRESS == 'undefined') return
-        const eventContract = new ethers.Contract(clientEnv.NEXT_PUBLIC_EVENT_ADDRESS, artifacts.abi, provider);
+        const eventContract = new ethers.Contract(clientEnv.NEXT_PUBLIC_EVENT_ADDRESS, artifacts.abi, signer);
 
         let wsProvider;
 
