@@ -12,6 +12,10 @@ const menus: Menu[] = [
     title: 'Home'
   },
   {
+    href: '/create-event',
+    title: 'Create Event'
+  },
+  {
     href: '/about',
     title: 'About'
   },
