@@ -25,6 +25,22 @@ const Navbar = ({ menus }: Props) => {
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <span className="font-semibold text-xl tracking-tight">Tickets Tocken</span>
       </div>
+      {
+        account
+          ? (
+            <div className="rounded-lg bg-white p-2">
+              {account.substring(0, 4)}...{account.substring(account.length - 4)}
+            </div>
+          )
+          : (
+            <button
+              className="rounded-lg bg-white p-2"
+              onClick={() => connectWallet(dispatch)}
+            >
+              Connect Wallet
+            </button>
+          )
+      }
       <div className="block lg:hidden">
         <button
           className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
@@ -49,22 +65,7 @@ const Navbar = ({ menus }: Props) => {
         </div>
 
       </div>
-      {
-        account
-          ? (
-            <div>
-              {account}
-            </div>
-          )
-          : (
-            <button
-              className="rounded-lg bg-white p-2"
-              onClick={() => connectWallet(dispatch)}
-            >
-              Connect Wallet
-            </button>
-          )
-      }
+      
     </nav>
   )
 }
