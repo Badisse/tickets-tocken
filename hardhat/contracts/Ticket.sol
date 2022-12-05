@@ -36,7 +36,7 @@ contract Ticket is ERC721 {
 
     // Function to create a new ticket
     function mintTicket() external payable {
-        require(_ticketIds.current() < maxTicketsSupply);
+        require(_ticketIds.current() < maxTicketsSupply, 'Event sold out');
         require(msg.value == price, 'You must send the ticket price value');
 
         (bool sent,) = payable(eventOwner).call{value: msg.value}("");
