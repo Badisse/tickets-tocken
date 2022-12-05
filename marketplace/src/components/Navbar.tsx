@@ -47,24 +47,24 @@ const Navbar = ({ menus }: Props) => {
             ))
           }
         </div>
-        {
-          account
-            ? (
-              <div>
-                {account}
-              </div>
-            )
-            : (
-              <button
-                className="rounded-lg bg-white p-2"
-                onClick={() => connectWallet(dispatch)}
-              >
-                Connect Wallet
-              </button>
-            )
-        }
 
       </div>
+      {
+        account
+          ? (
+            <div>
+              {account}
+            </div>
+          )
+          : (
+            <button
+              className="rounded-lg bg-white p-2"
+              onClick={() => connectWallet(dispatch)}
+            >
+              Connect Wallet
+            </button>
+          )
+      }
     </nav>
   )
 }
