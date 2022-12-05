@@ -16,7 +16,8 @@ const connectWallet = (dispatch: Dispatch<Action>): Promise<void> => {
         if (typeof clientEnv.NEXT_PUBLIC_EVENT_ADDRESS == 'undefined') return
         const eventContract = new ethers.Contract(clientEnv.NEXT_PUBLIC_EVENT_ADDRESS, artifacts.abi, signer);
 
-        let wsProvider;
+        let wsProvider = null;
+        let eventWsContract = null;
 
         switch (networkID.chainId) {
             case 31337:
@@ -31,6 +32,10 @@ const connectWallet = (dispatch: Dispatch<Action>): Promise<void> => {
                 break;
         }
 
+        if (wsProvider) {
+            eventWsContract = new ethers.Contract(clientEnv.NEXT_PUBLIC_EVENT_ADDRESS, artifacts.abi, wsProvider);
+        }
+
         dispatch({
             type: actions.connect,
             payload: {
@@ -39,7 +44,8 @@ const connectWallet = (dispatch: Dispatch<Action>): Promise<void> => {
                 signer,
                 account,
                 networkID,
-                eventContract
+                eventContract,
+                eventWsContract
             },
         });
     };

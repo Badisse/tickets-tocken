@@ -2,18 +2,18 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useEth } from "../contexts/EthContext";
-import type { Event } from 'ethers';
+import type { Event, BigNumber } from 'ethers';
 
 const Home: NextPage = () => {
   const {
-    state: { eventContract },
+    state: { eventContract, eventWsContract },
   } = useEth();
-  const [events, setEvents] = useState<Event[]>()
+  const [events, setEvents] = useState<Event[] | null>(null)
 
   useEffect(() => {
     const getEvents = async () => {
       const eventFilter = eventContract?.filters.EventCreated();
-      const eventsList: Event[] | undefined = eventFilter
+      const eventsList: Event[] | null = eventFilter
         ? await eventContract.queryFilter(eventFilter)
         : null;
       setEvents(eventsList)
@@ -22,6 +22,28 @@ const Home: NextPage = () => {
     getEvents()
     
   }, [eventContract])
+
+  useEffect(() => {
+    const getWsEvents = async () => {
+      eventWsContract?.on('EventCreated', async (
+        _id: BigNumber,
+        _name: string,
+        _date: string,
+        _location: string,
+        _ticket: string,
+        _uri: string,
+        event: Event
+      ) => {
+        setEvents((current) => {
+          return current
+            ? [...current, event]
+            : [event]
+        })
+      })
+    }
+
+    getWsEvents()
+  }, [eventWsContract])
 
   return (
     <>

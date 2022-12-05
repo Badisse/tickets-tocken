@@ -8,7 +8,8 @@ const initialState: State = {
     signer: null,
     account: null,
     networkID: null,
-    eventContract: null
+    eventContract: null,
+    eventWsContract: null
 };
 
 const reducer = (state: State, action: Action): State => {
