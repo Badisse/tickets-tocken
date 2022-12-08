@@ -17,9 +17,13 @@ const menus: Menu[] = [
     title: 'Create Event'
   },
   {
+    href: '/my-tickets',
+    title: 'My Tickets'
+  },
+  {
     href: '/about',
     title: 'About'
-  },
+  }
 ]
 
 const MyApp: AppType = ({ Component, pageProps }) => {
